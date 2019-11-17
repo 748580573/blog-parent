@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>比丘特之剑的博客</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/nprogress.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="apple-touch-icon-precomposed" href="images/icon.png">
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/vue-lazyload.js"></script>
+    <style>
+        .comment-content:hover{
+            opacity: 1.0;
+            cursor: default;
+        }
+
+        .reply>span:hover{
+            color: red;
+            cursor: pointer ;
+        }
+
+
+        .comment-ctrl{
+            margin-right: -4px;
+        }
+
+        .comment-submit{
+            margin-left: 3px;
+            display: inline-block;
+            float: right;
+            right: -2px;
+            bottom: -2px;
+            background: #3399CC;
+            border: none;
+            border: 2px solid;
+            border-color: #3399CC;
+            border-left: none;
+            border-top: none;
+            padding: 0px;
+            width: 100px;
+            height: 38px;
+            color: #FFF;
+            outline: 0;
+            border-radius: 0 0 2px 0;
+            font-size: 16px;
+            z-index: 6;
+        }
+        .commentTextArea{
+            border: none;
+        }
+    </style>
+</head>
+<body class="user-select" >
+<div style="height: 6px;background: linear-gradient(90deg, #ff00c3, #41bd3c);"></div>
+<header class="header">
+    <nav class="navbar navbar-default" id="navbar" style="background-color: #0f0f0f">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar" aria-expanded="false"> <span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                <h1 class="logo hvr-bounce-in"><a href="index.html" title=""><img src="img/motto.png" alt=""></a></h1>
+            </div>
+            <div class="collapse navbar-collapse" id="header-navbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a data-cont="" title="" href="index.html">首页</a></li>
+                    <li><a data-cont="java" title="java" href="javascript:void(0)" onclick="lookTag(this)" value="源码分享">java</a></li>
+                    <li><a data-cont="源码分享" title="源码分享" href="javascript:void(0)" onclick="lookTag(this)" value="源码分享">源码分享</a></li>
+                    <li><a data-cont="IT技术笔记" title="IT技术笔记" href="javascript:void(0)" onclick="lookTag(this)" value="IT技术笔记">IT技术笔记</a></li>
+                    <li><a data-cont="资讯分享" title="资讯分享" href="javascript:void(0)" onclick="lookTag(this)" value="资讯分享">资讯分享</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+    <!--##############################内容##################################-->
+ <section class="container">
+  <div class="content-wrap">
+    <div id="" class="content">
+      <header id="blog" class="article-header">
+        <h1 class="article-title"><a href="javascript:void(0)">{{blogTilte}}</a></h1>
+        <div class="article-meta">
+          <span class="item article-meta-time">
+          <time class="time"><i class="glyphicon glyphicon-time"></i> {{createDate}}</time>
+          </span>
+            <span class="item article-meta-source"><i class="glyphicon glyphicon-globe"></i> 比丘特之剑</span>
+            <span class="item article-meta-category" data-toggle="tooltip" data-placement="bottom"><i class="glyphicon glyphicon-list"></i>
+            <a v-for="tag in tags" href="javascript:void(0)">{{tag}}  </a></span>
+            <span class="item article-meta-views" ><i class="glyphicon glyphicon-eye-open"></i> 80</span>
+            <span class="item article-meta-comment"><i class="glyphicon glyphicon-comment"></i> 4</span>
+        </div>
+      </header>
+      <article id="blog_content" class="article-content">
+
+      </article>
+      <div id="tags" class="article-tags">标签：
+          <a v-for="tag in tags" href="javascript:void(0)" >{{tag}}</a>
+        </div>
+      <div class="title">
+        <h3>评论</h3>
+      </div>
+      <div id="comment">
+            <form name="comment-form">
+                <div class="comment">
+                    <div class="comment-box">
+                        <textarea placeholder="您的评论或留言（必填）" name="comment-textarea" id="comment-textarea" cols="100%" rows="3" tabindex="3"></textarea>
+                        <div class="comment-ctrl">
+                            <button type="button" name="comment-submit" id="comment-submit" tabindex="4" onclick="addComment(this)">评论</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+      <div id="postcomments">
+        <ol id="commentList" class="commentlist">
+        <li class="comment-content" v-for="comment in comments">
+            <span class="comment-f"></span>
+            <div class="comment-main">
+                <p><a class="address" href="javascript:void(0)" rel="nofollow" target="_blank">{{comment.userName}}</a><span class="time">{{comment.time}}</span><br>{{comment.content}}</p>
+                <div class="reply"><span class="glyphicon glyphicon-comment" v-bind:data-id="comment.id" onclick="addFirstReply(this)">回复</span></div>
+            </div>
+            <ol class="commentlist replyList" style="margin-left: 4%">
+                <li class="comment-content" v-for="reply in comment.replies">
+                    <span class="comment-f"></span>
+                    <div class="comment-main">
+                        <p><a class="address" href="javascript:void(0)" rel="nofollow" target="_blank">{{reply.userName}}</a><span class="time">{{reply.time}}</span><br>{{reply.content}}</p>
+                        <div class="reply"><span class="glyphicon glyphicon-comment" v-bind:data-id="reply.id" onclick="addReply(this)">回复</span></div>
+                    </div>
+                </li>
+            </ol>
+        </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <aside class="sidebar">
+    <div class="fixed">
+      <div class="widget widget-tabs">
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#notice" aria-controls="notice" role="tab" data-toggle="tab" draggable="false">统计信息</a></li>
+          <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab" draggable="false">联系站长</a></li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane contact active" id="notice">
+            <h2>日志总数:
+                  888篇
+              </h2>
+              <h2>网站运行:
+              <span id="sitetime">88天 </span></h2>
+          </div>
+            <div role="tabpanel" class="tab-pane contact" id="contact">
+              <h2>QQ:
+                  <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=577211782&amp;site=qq&amp;menu=yes" target="_blank" rel="nofollow" data-toggle="tooltip" data-placement="bottom" title="" draggable="false" data-original-title="QQ:577211782">577211782</a>
+              </h2>
+              <h2>Email:
+              <a href="mailto:577211782@qq.com" target="_blank" data-toggle="tooltip" rel="nofollow" data-placement="bottom" title="" draggable="false" data-original-title="Email:577211782@qq.com">577211782@qq.com</a></h2>
+          </div>
+        </div>
+      </div>
+      <div class="widget widget_search">
+          <div class="input-group">
+              <input id="key" type="text" name="keyword" class="form-control" size="35" placeholder="请输入关键字" maxlength="15" autocomplete="off">
+              <span class="input-group-btn">
+                        <button class="btn btn-default btn-search"  type="button" onclick="look()">搜索</button>
+              </span>
+          </div>
+      </div>
+    </div>
+    <div class="widget widget_hot">
+          <h3>最新评论文章</h3>
+<ul id="rank">
+    <li v-for="blog in blogs">
+        <a v-bind:title="blog.blogTilte" href="javascript:void(0)" v-bind:data-code="blog.blogCode" onclick="view_blog(this)">
+                <span class="thumbnail">
+                   <img class="thumb" v-lazy="blog.blogConverUrl"  style="display: block;">
+                </span>
+            <span class="text">{{blog.blogTilte}}</span>
+            <span class="muted"><i class="glyphicon glyphicon-time">123</i>
+                   {{blog.createDate}}
+                </span>
+            <span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span>
+        </a>
+    </li>
+</ul>
+</div>
+</aside>
+</section>
+    <footer class="footer">
+  <div class="container">
+     <p>本站[<a href="/" >比丘特之剑</a>]的部分内容来源于网络，若侵犯到您的利益，请联系站长删除！谢谢！ </p>
+  </div>
+  <div id="gotop"><a class="gotop"></a></div>
+</footer>
+</body>
+<script src="js/utils.js"></script>
+<script src="js/blog.js"></script>
+</html>

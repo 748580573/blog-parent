@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>markdown编辑</title>
+</head>
+<link rel="stylesheet" type="text/css" href="../css/editormd.css">
+<body>
+<div id="test-editor" >
+    <textarea style="display:none;"></textarea>
+</div>
+
+<br>
+<button type="button" onclick="test()">按钮</button>
+<script src="../js/jquery-3.2.1.js"></script>
+<script src="../js/editormd.min.js"></script>
+<script type="text/javascript">
+    var testEditor;
+    testEditor = editormd("test-editor", {
+        placeholder:'从这里书写每一天的收获吧！',  //默认显示的文字，这里就不解释了
+        width: "95%",
+        height: 600,
+        syncScrolling: "single",
+        path: "./lib/",   //你的path路径（原资源文件中lib包在我们项目中所放的位置）
+        saveHTMLToTextarea: true,
+        emoji: false,
+        taskList: true,
+        tocm: true,         // Using [TOCM]
+        tex: true,                   // 开启科学公式TeX语言支持，默认关闭
+        flowChart: true,             // 开启流程图支持，默认关闭
+        sequenceDiagram: true,       // 开启时序/序列图支持，默认关闭,
+        imageUpload: true,
+        imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+        imageUploadURL : "/blog/test", //文件提交请求路径
+    });
+
+    var test = function(){
+
+    }
+</script>
+</body>
+</html>

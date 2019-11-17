@@ -1,0 +1,129 @@
+.bqtzj-col-0{
+    width: 0;
+}
+.bqtzj-col-05{
+    width: 5%;
+}
+.bqtzj-col-1{
+    width: 10%;
+}
+.bqtzj-col-2{
+    width: 20%;
+}
+.bqtzj-col-3{
+    width: 30%;
+}
+.bqtzj-col-4{
+    width: 40%;
+}
+.bqtzj-col-5{
+    width: 50%;
+}
+.bqtzj-col-6{
+    width: 60%;
+}
+.bqtzj-col-7{
+    width: 70%;
+}
+.bqtzj-col-8{
+    width: 80%;
+}
+.bqtzj-col-9{
+    width: 90%;
+}
+.bqtzj-col-10{
+    width: 100%;
+}
+.bqtzj-inline{
+    display: inline;
+}
+.bqtzj-col-block{
+    display: block;
+}
+.bqtzj-inline-block{
+    display: inline-block;
+}
+
+.bqtzj-border-grey{
+    margin-right: 0;
+    margin-left: 0;
+    background-color: #fff;
+    border-color: #ddd;
+    border-width: 1px;
+    border-radius: 4px 4px 0 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.bqtzj-border-grey:focus{
+    box-shadow: #a1a2ff 1px 1px 5px 1px;
+}
+
+.bqtzj-left{
+    float: left;
+}
+
+.bqtzj-container{
+    text-align: center;
+    margin: auto 0;
+    font-size: 1.4em;
+    background-color: #fff;
+    color: #8B8B7A;
+    height: 35px;
+    padding: 5px;
+}
+
+.bqtzj-margin-055{
+    margin-left: 5.5%;
+}
+
+.bqtzj-margin-015{
+    margin-left: 1.5%;
+}
+
+.bqtzj-margin-top{
+    margin-top: 15px;
+}
+
+.bqtzj-input{
+    height: 35px;
+    background-color: #fff;
+    color: black;
+}
+
+.bqtzj-button-red{
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: #659fff;
+    border-color: #ccc;
+}
+
+.bqtzj-button-red:hover{
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+
+.bqtzj-fontsieze-1{
+    font-size: 1em;
+}
+.bqtzj-fontsieze-15{
+    font-size: 1.5em;
+}

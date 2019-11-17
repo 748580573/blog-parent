@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="blogTag">
+
+    <!--#####################用于博客内容展示#################################-->
+    <resultMap id="blogMapForShow" type="com.heng.blog_system.domain.bean.Blog">
+        <result property="blogCode" column="blog_code"/>
+        <result property="blogTilte" column="blog_title"/>
+        <result property="blogDesc" column="blog_desc"/>
+        <result property="blogContent" column="blog_content"/>
+        <result property="blogConverUrl" column="blog_conver_url"/>
+        <result property="tags" column="tag_name"/>
+        <result property="createDate" column="create_date"/>
+    </resultMap>
+
+    <!--###################用于首页###############################-->
+    <resultMap id="blogMapForIndex" type="com.heng.blog_system.domain.bean.Blog">
+        <result property="blogCode" column="blog_code"/>
+        <result property="blogTilte" column="blog_title"/>
+        <result property="blogDesc" column="blog_desc"/>
+        <result property="blogConverUrl" column="blog_conver_url"/>
+        <result property="tags" column="tag_name"/>
+        <result property="createDate" column="create_date"/>
+    </resultMap>
+
+
+
+    <insert id="addBlog" useGeneratedKeys="true" keyProperty="blogCode" parameterType="com.heng.blog_system.domain.bean.Blog">
+        INSERT INTO blog_article
+        <trim suffixOverrides="," prefix="set">
+            <if test="blogTilte != null">
+                blog_title = #{blogTilte},
+            </if>
+            <if test="blogDesc != null">
+                blog_desc = #{blogDesc},
+            </if>
+            <if test="blogContent != null">
+                blog_content = #{blogContent},
+            </if>
+            <if test="blogConverUrl != null">
+                blog_conver_url = #{blogConverUrl},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate},
+            </if>
+        </trim>
+    </insert>
+
+    <!--随机查找-->
+
+    <select id="randomSelectBlogs" resultMap="blogMapForIndex">
+            SELECT * FROM blog_article
+            WHERE blog_code >= ((SELECT MAX(blog_code) FROM blog_article)-(SELECT MIN(blog_code) FROM blog_article)) * RAND() + (SELECT MIN(blog_code) FROM blog_article)  LIMIT 3
+    </select>
+
+    <!--用于首页-->
+    <select id="selectBlogForIndex" parameterType="map" resultMap="blogMapForIndex">
+        SELECT
+        *
+        FROM
+        blog_article,
+        (
+        SELECT
+        GROUP_CONCAT( DISTINCT tags.tag_name ) tag_name ,blog_article.blog_code
+        FROM
+        blog_article,
+        tag_article,
+        tags
+        WHERE
+        tag_article.blog_code = blog_article.blog_code
+        AND tags.tag_code = tag_article.tag_code
+        <if test="blogCode != null">
+            AND tag_article.blog_code = "${blogCode}"
+        </if>
+        GROUP BY tag_article.blog_code
+        ) tagresult
+        WHERE tagresult.blog_code = blog_article.blog_code
+    </select>
+
+    <!--用于博客展示-->
+    <select id="selectBlogForShow" parameterType="map" resultMap="blogMapForShow">
+        SELECT
+        *
+        FROM
+        blog_article,
+        (
+        SELECT
+        GROUP_CONCAT( DISTINCT tags.tag_name ) tag_name ,blog_article.blog_code
+        FROM
+        blog_article,
+        tag_article,
+        tags
+        WHERE
+        tag_article.blog_code = blog_article.blog_code
+        AND tags.tag_code = tag_article.tag_code
+        <if test="blog_code != null">
+            AND tag_article.blog_code = "${blog_code}"
+        </if>
+        GROUP BY tag_article.blog_code
+        ) tagresult
+        WHERE tagresult.blog_code = blog_article.blog_code
+    </select>
+
+    <select id="selectBlogForSearch" parameterType="map" resultMap="blogMapForIndex">
+        SELECT
+        *
+        FROM
+        blog_article,
+        (
+        SELECT
+        GROUP_CONCAT( DISTINCT tags.tag_name ) tag_name ,blog_article.blog_code
+        FROM
+        blog_article,
+        tag_article,
+        tags
+        WHERE
+        tag_article.blog_code = blog_article.blog_code
+        AND tags.tag_code = tag_article.tag_code
+        <if test="blog_code != null">
+            AND tag_article.blog_code = "${blog_code}"
+        </if>
+        GROUP BY tag_article.blog_code
+        ) tagresult
+        WHERE tagresult.blog_code = blog_article.blog_code
+        <if test="start != null">
+            and create_date &gt;= #{start}
+        </if>
+        <if test="end != null">
+            and create_date &lt;= #{end}
+        </if>
+        <if test="blogTitle != null">
+            and blog_title like "%${blogTitle}%"
+        </if>
+        <if test="orderKey != null">
+            ORDER BY create_date desc
+        </if>
+        <if test="pageNumber != null">
+            limit ${(pageNumber - 1) * pageSize} ,${pageSize}
+        </if>
+    </select>
+
+    <select id="selectBlogForRecommend" parameterType="map" resultMap="blogMapForIndex">
+        SELECT
+        *
+        FROM
+        blog_article,
+        (
+        SELECT
+        GROUP_CONCAT( DISTINCT tags.tag_name ) tag_name ,blog_article.blog_code
+        FROM
+        blog_article,
+        tag_article,
+        tags
+        WHERE
+        tag_article.blog_code = blog_article.blog_code
+        AND tags.tag_code = tag_article.tag_code
+        GROUP BY tag_article.blog_code
+        ) tagresult
+        WHERE tagresult.blog_code = blog_article.blog_code
+        ORDER BY click_number,create_date DESC
+        <if test="pageNumber != null">
+            limit ${(pageNumber - 1) * pageSize} ,${pageNumber * pageSize}
+        </if>
+    </select>
+
+    <select id="selectBlogForRank" resultMap="blogMapForIndex" parameterType="map">
+        SELECT *
+        FROM blog_article
+        ORDER BY click_number,create_date DESC
+        <if test="pageNumber != null">
+            limit ${(pageNumber - 1) * pageSize} ,${pageNumber * pageSize}
+        </if>
+    </select>
+
+    <select id="selectBlogTotal" resultType="int" parameterType="map">
+        SELECT count(blog_code)
+        FROM blog_article
+        WHERE 1 = 1
+        <if test="start != null">
+            and create_date &gt;= #{start}
+        </if>
+        <if test="end != null">
+            and create_date &lt;= #{end}
+        </if>
+        <if test="blogTitle != null">
+            and blog_title like "%${blogTitle}%"
+        </if>
+        ;
+    </select>
+
+    <update id="updateBlog" parameterType="map">
+        UPDATE blog_article
+        <trim prefix="set" suffixOverrides=",">
+            <if test="blog_desc != null">blog_desc = #{blog_desc},</if>
+            <if test="blog_content != null">blog_content = #{blog_content},</if>
+        </trim>
+        WHERE  blog_code = #{blogCode}
+    </update>
+
+    <delete id="deleteBlog" parameterType="map">
+        DELETE FROM blog_article WHERE blog_code = #{blog_code};
+    </delete>
+
+    <!--##################################Tag############################################-->
+
+    <resultMap id="tagMap" type="com.heng.blog_system.domain.bean.Tag">
+        <result property="tagCode" column="tag_code"/>
+        <result property="tagName" column="tag_name"/>
+    </resultMap>
+
+    <insert id="addTag" parameterType="com.heng.blog_system.domain.bean.Tag" useGeneratedKeys="true" keyProperty="tagCode">
+        INSERT INTO tags(tag_name)
+        VALUES (#{tagName})
+    </insert>
+
+    <select id="selectTag" resultMap="tagMap" parameterType="map">
+        SELECT *
+        FROM tags
+        WHERE 1 = 1
+        <if test="tagCode != null">
+            AND tag_code = #{tagCode}
+        </if>
+        <if test="tagName != null">
+            AND tag_name = #{tagName}
+        </if>
+    </select>
+
+    <select id="selectAllTag" resultMap="tagMap">
+        SELECT DISTINCT(tags.tag_name) FROM tags;
+    </select>
+
+    <select id="selecTagsByBlog" parameterType="map" resultType="String">
+        SELECT
+        GROUP_CONCAT( DISTINCT tags.tag_name ) tag_name
+        FROM
+        blog_article,
+        tag_article,
+        tags
+        WHERE
+        tag_article.blog_code = blog_article.blog_code
+        AND tags.tag_code = tag_article.tag_code
+        <if test="blog_code != null">
+            AND tag_article.blog_code = "${blog_code}"
+        </if>
+        GROUP BY tag_article.blog_code
+    </select>
+
+    <!--################################标签-博客关联表################################################-->
+
+    <insert id="insertTagBlog" parameterType="map">
+          insert into tag_article(blog_code,tag_code) values (#{blogCode},#{tagCode})
+    </insert>
+    <delete id="deleteTagBlog" parameterType="map">
+        DELETE FROM tag_article WHERE  blog_code = #{blog_code};
+    </delete>
+    
+    <select id="selectTagBlog" parameterType="map" resultType="map">
+        select
+        *
+        from tag_article
+        where
+        <trim prefixOverrides="and">
+            <if test="tagCode != null">
+                and tag_code = #{tagCode}
+            </if>
+            <if test="blogCode != null">
+                and blog_code = #{blogCode}
+            </if>
+        </trim>
+    </select>
+
+    <select id="selectImgs" resultType="string">
+        select blog_conver_url from blog_article
+    </select>
+</mapper>
+

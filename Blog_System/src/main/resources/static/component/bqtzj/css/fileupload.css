@@ -1,0 +1,38 @@
+.file{
+    position: relative;
+    display: inline-block;
+    width: 80px;
+    height: 35px;
+    background-color: #11744e;
+    opacity: 0.9;
+    text-align: center;
+    color: white;
+}
+.file:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+.file-upload{
+    width: 80px;
+    height: 35px;
+    position: absolute;
+    padding: 0px;
+    margin: 0px;
+    font-size: 0px;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.ico-plus{
+    height: 22px;
+    display: inline-block;
+}
+
+.file-image{
+    display: inline-block;
+}
+
+.file-image>img{
+    width: 150px;
+}

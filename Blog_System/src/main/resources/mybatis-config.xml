@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties>
+        <property name="dialect" value="mysql"/>
+    </properties>
+    <settings>
+        <!-- 打印查询语句 -->
+        <setting name="logImpl" value="LOG4J" />
+    </settings>
+
+    <mappers>
+        <mapper resource="mapper/blog.xml"/>
+        <mapper resource="mapper/tags.xml"/>
+        <mapper resource="mapper/blog_tag.xml"/>
+        <mapper resource="mapper/permissionAuth.xml"/>
+        <mapper resource="mapper/visitor.xml"/>
+        <mapper resource="mapper/comment.xml"/>
+        <mapper resource="mapper/template.xml"/>
+        <mapper resource="mapper/logger.xml"/>
+
+    </mappers>
+
+</configuration>

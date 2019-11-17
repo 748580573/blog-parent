@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" href="../component/bootstarp/css/bootstrap.min.css">
+<link rel="stylesheet" href="../component/bqtzj/css/bqtzj.css">
+<link rel="stylesheet" href="../component/bqtzj/css/fileupload.css">
+<body>
+
+<div style="margin-top: 8px;margin-bottom: 10px">
+    <input id="title" class="bqtzj-col-7 bqtzj-border-grey bqtzj-left bqtzj-input bqtzj-margin-055" placeholder=" 请输入标题">
+    <input id="desc" class="bqtzj-col-7 bqtzj-border-grey bqtzj-left bqtzj-input bqtzj-margin-055 bqtzj-margin-top" placeholder=" 博客描述">
+    <button class="bqtzj-button-red bqtzj-margin-015" onclick="submit()">发布文章</button>
+</div>
+
+<iframe id="markd" name="markd" src="../component/markd/html/index.html" frameborder="0" width="100%" height="600" scrolling="no"></iframe>
+
+</body>
+<script src="../component/jquery/js/jquery-3.2.1.min.js"></script>
+<script src="../component/bootstarp/js/bootstrap.min.js-v=3.3.5"></script>
+<script>
+    var submit = function(){
+        var testEditor = document.getElementById("markd").contentWindow.testEditor;
+        var markdContent = testEditor.getMarkdown();
+        var blogContent = testEditor.getHTML();
+        var blogTilte = $("#title").val();
+        var blogDesc = $("#desc").val();
+        $.ajax({
+            url:"/blog/blog/editBlog.html",
+            data:{"markdContent":markdContent,"blogContent":blogContent,"blogTilte":blogTilte,
+                  "blogDesc":blogDesc},
+            type:"post",
+            success:function (result) {
+                alert(result.message);
+            }
+        })
+    }
+</script>
+</html>
