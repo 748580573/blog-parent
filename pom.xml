@@ -5,16 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.heng</groupId>
-    <artifactId>blog_parent</artifactId>
+    <artifactId>blog-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>Blog_System</module>
-        <module>blog_eureka</module>
-        <module>blog_calculator</module>
-        <module>blog_component</module>
-        <module>blog_common</module>
+        <module>blog-eureka</module>
+        <module>blog-common</module>
+        <module>blog-component</module>
+        <module>blog-system</module>
+        <module>blog-calculator</module>
     </modules>
 
     <properties>

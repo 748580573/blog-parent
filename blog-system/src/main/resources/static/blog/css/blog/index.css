@@ -1,0 +1,446 @@
+*{
+    margin: 0;
+}
+a{
+    text-decoration:none !important;
+}
+ul{
+    padding: 0;
+}
+li{
+    list-style: none;
+    padding: 0;
+}
+body{
+    background-color: #eceff4;
+    color: #777777;
+    }
+header{
+    background-color: black;
+    color: white;
+    width: 76%;
+    margin: 0 auto;
+}
+
+.container{
+    background-color: #f1f3f4;
+    font-size: 0.8em;
+    color: #98A6AD;
+    width: 76%;
+    margin: 0 auto;
+    padding: 0;
+    box-shadow:0 0 30px rgba(0,0,0,.3);
+}
+
+.container-left{
+    margin: 0;
+    width: 22.85%;
+    background-color: #f9f9f9;
+    color: #58666e;
+    float: left;
+}
+
+.container-other{
+    width: 77%;
+    float: left;
+    overflow:scroll; width:77%; height:1000px;
+}
+
+.container-middle{
+    margin: 0 0.15% 0 0;
+    background-color: #f1f3f4;
+    float: left;
+    height: 1800px;
+    width: 71.3%;
+}
+.container-right{
+    color: #777777;
+    margin: 0;
+    width:28.5%;
+    background-color: #f9f9f9;
+    float: left;
+}
+
+.signature{
+    margin-top: 25px;
+}
+
+.signature-img{
+    display: block;
+    text-align: center;
+}
+
+.signature-message{
+    text-decoration: none;
+    display: block;
+    width: 50%;
+    margin: 8px auto 16px;
+    text-align: center;
+}
+
+.signature-message:visited{
+    color: #58666e;
+}
+
+.signature-message span{
+    width:100%;
+    display: block;
+}
+
+.nav-tab-ul li{
+    padding-left: 10%;
+}
+
+.container-left-nav{
+    height: 450px;
+    overflow:auto;
+    width:100%;
+}
+
+.container-left-nav a{
+    display: block;
+    font-size: 1.3em;
+    height: 40px;
+    padding-top: 10px;
+    color: #777777 !important;;
+}
+
+.container-left-nav>ul{
+    padding: 0px;
+}
+
+.container-left-nav>ul>li{
+    width: 100%;
+    margin-top: 5px;
+}
+
+.nav-tab a{
+    padding-left: 8%;
+}
+
+.nav-tab a span{
+    padding-left:4%;
+}
+
+
+.nav-tab-a:hover{
+    background-color: #ececec;
+}
+
+.nav-tab-link:hover{
+    background-color: #ececec;
+}
+
+.nav-arrow{
+    font-size: 0.5em;
+    margin-left: 50%;
+}
+
+.container-left-nav>ul>li i{
+}
+
+.font-nav{
+    color: #98A6AD;
+    font-size: 1.2em;
+}
+
+.pading-nav{
+    padding-left: 4%;
+}
+
+.setting ul{
+    padding: 0  0 0 8%;
+}
+.setting ul li{
+    text-align: center;
+     width: 30%;
+     float: left;
+ }
+
+.setting{
+    font-size: 1.1em;
+}
+
+.setting a{
+    display: block;
+    color: #777777;
+}
+
+.setting a:hover{
+    display: block;
+    color: #98A6AD;
+}
+
+.setting-icon{
+    margin: 0 auto;
+}
+
+.tip{
+    height: 50px;
+    background-color: #f9f9f9;
+    text-align: center;
+    color: #A0A0A0;
+    padding: 15px;
+}
+
+.comment{
+    height: 50px;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.comment-li{
+    height: 50px;
+    width: 33.3%;
+    float: left;
+    padding-top: 14px;
+    border-bottom: 1px solid black  ;
+    font-size: 1.5em;
+}
+
+.comment-li:hover{
+    cursor: pointer;
+}
+
+.section-1{
+
+}
+
+.title{
+    font-size: 1.4em;
+    padding-left: 10%;
+    padding-top: 20px;
+}
+
+.title ul{
+    padding: 0;
+}
+
+.upper-right-ul li{
+    height: 80px;
+}
+
+.upper-right-ul a{
+    display: block;
+    padding-top: 18px;
+    margin-left: 10%;
+    width: 20%;
+    float: left;
+}
+
+.upper-right-ul img{
+    width: 100%;
+    border-radius:50%;
+    box-shadow:2px 2px 3px #e1e1e1;
+    border:2px solid #fff;
+}
+
+
+.no-name{
+    float: left;
+    width: 65%;
+    padding-left: 6%;
+    padding-top: 4px;
+    height: 55px;
+}
+
+.no-name h4{
+    font-size: 1.2em;
+    line-height: 1.5;
+}
+
+.comment-icon{
+    float: left;
+    width: 65%;
+    padding-left:6%;
+}
+
+.text-hidden{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.blog-info{
+    margin-top: 3px;
+    padding: 0 0 0 10%;
+}
+
+.blog-info li{
+    background-color: white;
+    border: 1px solid #ddd;
+    height: 40px;
+    width: 85%;
+    color: #a0a0a0;
+    font-size: 1.3em;
+    padding-left: 5%;
+    padding-top: 7px;
+    margin-bottom: -1px;
+}
+
+.blog-info div{
+    width: 60%;
+    display: inline-block;
+    padding-left: 4%;
+}
+
+.tag-set{
+    margin-top: 5px;
+    width: 80%;
+    padding-left: 10%;
+}
+
+.tag-set a{
+    text-align: center;
+    color: white;
+    margin-right: 4%;
+    margin-bottom: 4px;
+    background-color: #777777;
+    text-shadow:0 1px 0 rgba(0,0,0,.2);
+    font-size: 1.3em;
+    display:inline-block;
+    padding: 1px 5px;
+}
+
+.blog-content{
+    padding:0 4% 0 4%;
+}
+
+.blog-content-info{
+    height: 180px;
+    background-color: white;
+    padding: 30px 5%;
+    margin-top: 30px;
+}
+
+.post{
+    color: black;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    text-align: center;
+    font-size: 2em;
+    padding-top: 7px;
+    border: 1px solid #eaeaea;
+    display: inline-block;
+}
+
+.post-h2{
+    display: inline-block;
+    font-size: 2em;
+    margin-left: 2%;
+    color: #777;
+}
+
+.blog-content p{
+    text-indent:3.5em;
+    font-size: 1.3em;
+}
+
+.line{
+    height: 1px;
+    width: 100%;
+    border-color:black;
+    border-bottom:1px solid #dee5e7;
+    margin-top: 10px;
+}
+
+.blog-user{
+    font-size: 1.3em;
+    margin-top: 10px;
+}
+
+.blog-content span{
+    margin:  0 2%;
+}
+
+
+.page{
+    height: 40px;
+    padding:0 4% 0 4%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.page-ul{
+    margin-left: 35%;
+}
+
+.page-ul li{
+    padding-top: 6px;
+    width: 8%;
+    height: 30px;
+    background-color: white;
+    float: left;
+}
+
+.page-ul a{
+    display: block;
+    margin-right: 4%;
+}
+
+.header{
+    padding: 0 0 0 3%;
+    height: 60px;
+}
+
+.header-search{
+    display: inline-block;
+    width: 17%;
+    height: 30px;
+    background-color: #eceff4;
+    margin-top: 10px;
+    margin-left: 3%;
+    border-radius:10px;
+}
+
+.header-search-input{
+    width: 80%;
+    float: left;
+}
+
+.header-search input{
+    background-color: #eceff4;
+    border: none;
+    height: 30px;
+    text-indent:1em;
+    color: #777777;
+    width: 100%;
+}
+
+.header-search input:focus{
+    background-color: white;
+
+}
+
+#search-button{
+    background-color: #eceff4;
+    margin-bottom: 6px;
+    width: 20%;
+    float: left;
+    height: 30px;
+    padding: 5px 0 0 6%;
+}
+
+.author-log{
+    float: left;
+    margin-right: 4%;
+}
+
+.login{
+    float: right;
+    height: 60px;
+    color: #98A6AD;
+}
+
+.login li{
+    padding: 20px;
+}
+
+.login a{
+    color: #98A6AD;
+}
